@@ -1,0 +1,30 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: devops-project-config
+  namespace: devops
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: devops-project-deployment
+  namespace: devops
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      app: devops-project
+  template:
+    metadata:
+      labels:
+        app: devops-project
+    spec:
+      containers:
+        - name: devops-project
+          image: kvasilovski/dockerappdjango:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
+          envFrom:
+            - configMapRef:
+                name: devops-project-config
