@@ -3,8 +3,6 @@ kind: Ingress
 metadata:
   name: devops-project-ingress
   namespace: devops
-  annotations:
-    ingress.kubernetes.io/ssl-redirect: "false"
 spec:
   rules:
   - http:
